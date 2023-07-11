@@ -1,26 +1,21 @@
 #!/usr/bin/python3
 """Defines the HBnB console."""
+import cmd
 
-import sys
+class HBNBCommand(cmd.Cmd):
+    prompt = '(hbnb) '
 
-# Function to handle the commands
-def process_command(command):
-    # Implement your logic to handle different commands
-    if command == 'help':
-        print("Documented commands (type help <topic>):")
-        print("========================================")
-        print("EOF  help  quit")
-    elif command == 'quit':
-        sys.exit()
+    def do_quit(self, arg):
+        """Quit command to exit the program"""
+        return True
 
-# Interactive mode
-if sys.stdin.isatty():
-    while True:
-        command = input("(hbnb) ")
-        process_command(command)
+    def do_EOF(self, arg):
+        """Exit the program with EOF (Ctrl+D)"""
+        return True
 
-# Non-interactive mode
-else:
-    for line in sys.stdin:
-        command = line.strip()
-        process_command(command)
+    def emptyline(self):
+        """Do nothing when an empty line is entered"""
+        pass
+
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()
