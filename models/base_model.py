@@ -1,47 +1,30 @@
 #!/usr/bin/python3
-from datetime import datetime, timezone, timedelta
-import uuid
-import json
-import os
+from datetime import datetime
+from uuid import uuid4
 
 
-class BaseModel():
+class BaseModel:
     """BaseModel defines all common attributes/methods for other classes"""
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """ Common attributes of all sub classes """
-        self.id = str(uuid.uuid4())
-        self.created_at = str(datetime.now())
-        self.updated_at = str(datetime.now())
+        self.id = str(uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
 
-    @classmethod
-    def do_save(cls):
-        """ Saves a new user to the file storage """
-        obj = BaseModel()
-        object_data = {
-            "id": obj.id,
-            "created_at": obj.created_at,
-            "updated_at": obj.updated_at
-        }
+    def __str__(self) -> str:
+        """ Returns: [class name] (ID) <class dictionary>"""
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
-        # If the file already exists, we append to avoid overwriting objects.
-        file_path = 'engine/json_object_file.json'
-        if os.path.exists(file_path):
-            with open(file_path, 'r') as faith:
-                objects = json.load(faith)
-        else:
-            objects = []
-        objects.append(object_data)
+    def do_save(self):
+        """ updates the public updated_at with the current datetime """
+        self.updated_at = datetime.now()
 
-        BaseModel.do_to_json(objects, file_path)
+    def do_dict(self):
+        """ Returns a dictionary containing all keys/values of the instance"""
+        object_data = self.__dict__.copy()
+        object_data['__class__'] = self.__class__.__name__
+        object_data['created_at'] = self.created_at.isoformat()
+        object_data['updated_at'] = self.updated_at.isoformat()
 
-        return f"User: {obj.id} has been created at {obj.created_at} and updated at {obj.updated_at}"
-
-    @staticmethod
-    def do_to_json(object_data, file_path):
-        """ Serializes a class into a JSON file for storage """
-        with open(file_path, "w") as viestar:
-            json.dump(object_data, viestar)
-
-
-print(BaseModel.do_save())
+        return (object_data)
