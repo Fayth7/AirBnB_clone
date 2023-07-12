@@ -16,11 +16,11 @@ class BaseModel:
         """ Returns: [class name] (ID) <class dictionary>"""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
-    def do_save(self):
+    def save(self):
         """ updates the public updated_at with the current datetime """
         self.updated_at = datetime.now()
 
-    def do_dict(self):
+    def to_dict(self):
         """ Returns a dictionary containing all keys/values of the instance"""
         object_data = self.__dict__.copy()
         object_data['__class__'] = self.__class__.__name__
