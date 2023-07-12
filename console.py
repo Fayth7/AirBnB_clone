@@ -120,16 +120,6 @@ class HBNBCommand(cmd.Cmd):
         """Default behavior for unrecognized commands"""
         print("*** Unknown syntax: {}".format(line))
 
-    def do_help(self, arg):
-        """Display help information"""
-        if arg == "":
-            print("Documented commands (type help <topic>):")
-            print("========================================")
-            print("EOF  all  create  destroy  help  quit  show  update")
-        else:
-            super().do_help(arg)
-
 
 if __name__ == '__main__':
-    models.storage.reload()
     HBNBCommand().cmdloop()
