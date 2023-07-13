@@ -22,9 +22,13 @@ class HBNBCommand(cmd.Cmd):
         "BaseModel", "Amenity", "City", "Place", "Review", "State", "User"
     }
 
-    def do_emptyline(self):
+    def emptyline(self):
         """Do nothing when an empty line is entered"""
-        return True
+        pass
+
+    # def do_emptyline(self):
+    #     """Do nothing when an empty line is entered"""
+    #     return True
 
     def do_quit(self, arg):
         """Exit the program"""
