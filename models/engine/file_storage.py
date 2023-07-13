@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" File storage Class Model """
+""" File storage Class Model"""
+
 
 import json
 import os
@@ -15,17 +16,17 @@ from models.place import Place
 class FileStorage():
     """ Serializes instances to a JSON file and vice versa """
 
-    __file_path = "faith.json"
+    __file_path = "file.json"
     __objects = {}
-    # self.name = __class__.__name__ + str(id)
 
     def all(self):
-        """ Returns the dictionary __objects """
-        return (self.__objects)
+        """Returns the dictionary __objects"""
+        return self.__objects
 
     def new(self, obj):
-        """ Sets in __objects the obj with key <obj class name>.id"""
-        self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
+        """Sets in __objects the obj with key <obj class name>.id"""
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
         """ Serializes a class dict into a JSON file for storage"""
