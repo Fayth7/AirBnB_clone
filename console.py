@@ -22,6 +22,17 @@ class HBNBCommand(cmd.Cmd):
         "BaseModel", "Amenity", "City", "Place", "Review", "State", "User"
     }
 
+    def parseline(self, line):
+        """Override the default parseline() method to handle <class name>.all() command"""
+        line = line.strip()
+        if line.startswith("."):
+            line = line[1:]
+        if line.startswith("<") and line.endswith(">"):
+            cmd, arg = line[1:-1], ""
+        else:
+            cmd, _, arg = line.partition(" ")
+        return cmd, arg, line
+
     def emptyline(self):
         """Do nothing when an empty line is entered"""
         pass
@@ -148,8 +159,19 @@ class HBNBCommand(cmd.Cmd):
                     print("** attribute doesn't exist **")
 
     def default(self, line):
-        """Default behavior for unrecognized commands"""
-        print("*** Unknown syntax: {}".format(line))
+        """Handle the <class name>.all() command"""
+        class_name, _, command = line.partition(".")
+        if class_name in self.classes:
+            if command == "all()":
+                self.do_all(class_name)
+            elif command == "count()":
+                self.do_count(class_name)
+            elif command == "show()":
+                self.do_show(class_name)
+            else:
+                print("** no instance found **")
+        else:
+            print("*** Unknown syntax: {}".format(line))
 
     # def do_help(self, arg):
     #     """Display help information"""
