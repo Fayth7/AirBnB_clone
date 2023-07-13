@@ -11,6 +11,7 @@ from models.review import Review
 from models.state import State
 from models.user import User
 import json
+from shlex import split
 
 
 class HBNBCommand(cmd.Cmd):
@@ -84,18 +85,33 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Prints all string representations of instances"""
         from models import storage
-        args = arg.split()
-        if len(args) == 0:
-            objects = storage.all()
-            print([str(obj) for obj in objects.values()])
-        elif args[0] not in self.classes:
-            print("** class doesn't exist **")
-        else:
-            print([str(obj)
-                  for obj in objects.values() if isinstance(obj, eval(arg))])
-            class_name = args[0]
-            objects = storage.all(class_name)
+        arg_list = split(arg)
+        objects = storage.all().values()
+        if not arg_list:
+            # In case no arguments are passed
             print([str(obj) for obj in objects])
+        else:
+            if arg_list[0] not in self.classes:
+                # In Case a wrong class is passed
+                print("** class doesn't exist **")
+            else:
+                # In case a right class is passed
+                print([str(obj) for obj in objects
+                       if arg_list[0] in str(obj)])
+
+        # from models import storage
+        # args = arg.split()
+        # if len(args) == 0:
+        #     objects = storage.all()
+        #     print([str(obj) for obj in objects.values()])
+        # elif args[0] not in self.classes:
+        #     print("** class doesn't exist **")
+        # else:
+        #     # print([str(obj)
+        #     #       for obj in objects.values() if isinstance(obj, eval(arg))])
+        #     class_name = args[0]
+        #     objects = storage.all(class_name)
+        #     print([str(obj) for obj in objects])
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id"""
