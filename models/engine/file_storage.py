@@ -16,7 +16,7 @@ from models.place import Place
 class FileStorage():
     """ Serializes instances to a JSON file and vice versa """
 
-    __file_path = "file.json"
+    __file_path = "faith.json"
     __objects = {}
 
     def all(self):
