@@ -10,7 +10,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-import models
+import json
 
 
 class HBNBCommand(cmd.Cmd):
@@ -46,6 +46,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """Prints the string representation of an instance based on the class name and id"""
+        from models import storage
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -55,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             key = "{}.{}".format(args[0], args[1])
-            objects = models.storage.all()
+            objects = storage.all()
             if key in objects:
                 print(objects[key])
             else:
@@ -63,6 +64,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
+        from models import storage
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -72,15 +74,16 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             key = "{}.{}".format(args[0], args[1])
-            objects = models.storage.all()
+            objects = storage.all()
             if key in objects:
                 objects.pop(key)
-                models.storage.save()
+                storage.save()
             else:
                 print("** no instance found **")
 
     def do_all(self, arg):
         """Prints all string representations of instances"""
+        from models import storage
         args = arg.split()
         if len(args) == 0:
             objects = storage.all()
@@ -96,6 +99,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id"""
+        from models import storage
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -105,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             key = "{}.{}".format(args[0], args[1])
-            objects = models.storage.all()
+            objects = storage.all()
             if key not in objects:
                 print("** no instance found **")
             elif len(args) == 2:
@@ -138,6 +142,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_count(self, arg):
         """Counts the number of instances of a class"""
+        from models import storage
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -145,13 +150,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             class_name = args[0]
-            objects = models.storage.all()
+            objects = storage.all()
             count = sum(1 for obj in objects.values()
                         if type(obj).__name__ == class_name)
             print(count)
 
     def do_show_id(self, arg):
         """Show an instance based on its ID"""
+        from models import storage
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -162,7 +168,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             class_name = args[0]
             instance_id = args[1].strip("\"'")
-            objects = models.storage.all()
+            objects = storage.all()
             key = "{}.{}".format(class_name, instance_id)
             if key in objects:
                 print(objects[key])
@@ -171,6 +177,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy_id(self, arg):
         """Destroy an instance based on its ID"""
+        from models import storage
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -181,16 +188,17 @@ class HBNBCommand(cmd.Cmd):
         else:
             class_name = args[0]
             instance_id = args[1].strip("\"'")
-            objects = models.storage.all()
+            objects = storage.all()
             key = "{}.{}".format(class_name, instance_id)
             if key in objects:
                 objects.pop(key)
-                models.storage.save()
+                storage.save()
             else:
                 print("** no instance found **")
 
     def do_update_id(self, arg):
         """Update an instance based on its ID"""
+        from models import storage
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -207,7 +215,7 @@ class HBNBCommand(cmd.Cmd):
             instance_id = args[1].strip("\"'")
             attribute_name = args[2]
             attribute_value = args[3].strip("\"'")
-            objects = models.storage.all()
+            objects = storage.all()
             key = "{}.{}".format(class_name, instance_id)
             if key in objects:
                 instance = objects[key]
@@ -223,6 +231,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update_dict(self, arg):
         """Update an instance based on its ID with a dictionary representation"""
+        from models import storage
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -238,7 +247,7 @@ class HBNBCommand(cmd.Cmd):
             dictionary = ' '.join(args[2:]).replace("'", "\"")
             try:
                 attrs = json.loads(dictionary)
-                objects = models.storage.all()
+                objects = storage.all()
                 key = "{}.{}".format(class_name, instance_id)
                 if key in objects:
                     instance = objects[key]
@@ -256,6 +265,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_count(self, arg):
         """Counts the number of instances of a class"""
+        from models import storage
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -263,13 +273,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             class_name = args[0]
-            objects = models.storage.all()
+            objects = storage.all()
             count = sum(1 for obj in objects.values()
                         if type(obj).__name__ == class_name)
             print(count)
 
     def do_show_id(self, arg):
         """Show an instance based on its ID"""
+        from models import storage
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -280,7 +291,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             class_name = args[0]
             instance_id = args[1].strip("\"'")
-            objects = models.storage.all()
+            objects = storage.all()
             key = "{}.{}".format(class_name, instance_id)
             if key in objects:
                 print(objects[key])
@@ -299,16 +310,17 @@ class HBNBCommand(cmd.Cmd):
         else:
             class_name = args[0]
             instance_id = args[1].strip("\"'")
-            objects = models.storage.all()
+            objects = storage.all()
             key = "{}.{}".format(class_name, instance_id)
             if key in objects:
                 objects.pop(key)
-                models.storage.save()
+                storage.save()
             else:
                 print("** no instance found **")
 
     def do_update_id(self, arg):
         """Update an instance based on its ID"""
+        from models import storage
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -325,7 +337,7 @@ class HBNBCommand(cmd.Cmd):
             instance_id = args[1].strip("\"'")
             attribute_name = args[2]
             attribute_value = args[3].strip("\"'")
-            objects = models.storage.all()
+            objects = storage.all()
             key = "{}.{}".format(class_name, instance_id)
             if key in objects:
                 instance = objects[key]
@@ -341,6 +353,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update_dict(self, arg):
         """Update an instance based on its ID with a dictionary representation"""
+        from models import storage
+
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -356,7 +370,7 @@ class HBNBCommand(cmd.Cmd):
             dictionary = ' '.join(args[2:]).replace("'", "\"")
             try:
                 attrs = json.loads(dictionary)
-                objects = models.storage.all()
+                objects = storage.all()
                 key = "{}.{}".format(class_name, instance_id)
                 if key in objects:
                     instance = objects[key]
@@ -374,5 +388,6 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    models.storage.reload()
+    from models import storage
+    storage.reload()
     HBNBCommand().cmdloop()
