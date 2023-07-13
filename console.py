@@ -9,6 +9,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+import models
 
 
 class HBNBCommand(cmd.Cmd):
@@ -19,9 +20,9 @@ class HBNBCommand(cmd.Cmd):
         "BaseModel", "Amenity", "City", "Place", "Review", "State", "User"
     }
 
-    def emptyline(self):
+    def do_emptyline(self):
         """Do nothing when an empty line is entered"""
-        pass
+        return True
 
     def do_quit(self, arg):
         """Exit the program"""
@@ -85,7 +86,8 @@ class HBNBCommand(cmd.Cmd):
         elif arg not in self.classes:
             print("** class doesn't exist **")
         else:
-            print([str(obj) for obj in objects.values() if isinstance(obj, eval(arg))])
+            print([str(obj)
+                  for obj in objects.values() if isinstance(obj, eval(arg))])
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id"""
@@ -120,14 +122,14 @@ class HBNBCommand(cmd.Cmd):
         """Default behavior for unrecognized commands"""
         print("*** Unknown syntax: {}".format(line))
 
-    def do_help(self, arg):
-        """Display help information"""
-        if arg == "":
-            print("Documented commands (type help <topic>):")
-            print("========================================")
-            print("EOF  all  create  destroy  help  quit  show  update")
-        else:
-            super().do_help(arg)
+    # def do_help(self, arg):
+    #     """Display help information"""
+    #     if arg == "":
+    #         print("Documented commands (type help <topic>):")
+    #         print("========================================")
+    #         print("EOF  all  create  destroy  help  quit  show  update")
+    #     else:
+    #         super().do_help(arg)
 
 
 if __name__ == '__main__':
