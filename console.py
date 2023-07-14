@@ -85,7 +85,8 @@ class HBNBCommand(cmd.Cmd):
         elif arg not in self.classes:
             print("** class doesn't exist **")
         else:
-            print([str(obj) for obj in objects.values() if isinstance(obj, eval(arg))])
+            print([str(obj)
+                  for obj in objects.values() if isinstance(obj, eval(arg))])
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id"""
@@ -117,8 +118,19 @@ class HBNBCommand(cmd.Cmd):
                     print("** attribute doesn't exist **")
 
     def default(self, line):
-        """Default behavior for unrecognized commands"""
-        print("*** Unknown syntax: {}".format(line))
+        """Handle the <class name>.all() command"""
+        class_name, _, command = line.partition(".")
+        if class_name in self.classes:
+            if command == "all()":
+                self.do_all(class_name)
+            elif command == "count()":
+                self.do_count(class_name)
+            elif command == "show()":
+                self.do_show(class_name)
+            else:
+                print("** no instance found **")
+        else:
+            print("*** Unknown syntax: {}".format(line))
 
 
 if __name__ == '__main__':
