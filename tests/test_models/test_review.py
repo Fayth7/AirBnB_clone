@@ -38,13 +38,9 @@ class TestReview(unittest.TestCase):
         """ Is the city_id sttributes of type INTEGER? """
         self.assertIsNot(type(self.review.city_id), int)
 
-    def test_city_id_attr_type_false(self):
-        """ Is the city_id sttributes of type STRING? """
-        self.assertFalse(str(self.review.city_id))
-
-    def test_non_city_id_attr_type(self):
+    def test_non_city_id_attr_empty(self):
         """ Is the city_id sttributes of type INTEGER? """
-        self.assertFalse(bool(self.review.city_id))
+        self.assertFalse(bool(getattr(self.review, "city_id")))
 
     def test_user_id_attr_type_string(self):
         """ Is the user_id sttributes of type STRING? """
@@ -54,13 +50,9 @@ class TestReview(unittest.TestCase):
         """ Is the user_id sttributes of type INTEGER? """
         self.assertIsNot(type(self.review.user_id), int)
 
-    def test_user_id_attr_type_false(self):
+    def test_user_id_attr_empty(self):
         """ Is the user_id sttributes of type STRING? """
-        self.assertFalse(str(self.review.user_id))
-
-    def test_non_user_id_attr_type(self):
-        """ Is the user_id sttributes of type INTEGER? """
-        self.assertFalse(bool(self.review.user_id))
+        self.assertFalse(self.review.user_id)
 
     def test_text_attr_type_string(self):
         """ Is the text sttributes of type STRING? """
@@ -70,10 +62,6 @@ class TestReview(unittest.TestCase):
         """ Is the text sttributes of type INTEGER? """
         self.assertIsNot(type(self.review.text), int)
 
-    def test_text_attr_type_false(self):
-        """ Is the text sttributes of type STRING? """
-        self.assertFalse(str(self.review.text))
-
-    def test_non_text_attr_type(self):
+    def test_non_text_attr_empty(self):
         """ Is the text sttributes of type INTEGER? """
-        self.assertFalse(bool(self.review.text))
+        self.assertFalse(bool(getattr(self.review, "text")))
