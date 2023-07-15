@@ -11,7 +11,7 @@ class TestAmenity(unittest.TestCase):
     """ Amenity test cases """
 
     def setUp(self):
-        """ Fetching the class for testing """
+        """ Test suite arrangements """
         self.amenity = Amenity()
 
     def test_inheritance(self):
@@ -35,3 +35,7 @@ class TestAmenity(unittest.TestCase):
     def test_non_attributes_type(self):
         """ Is the name empty"""
         self.assertFalse(bool(getattr(self.amenity, "name")))
+
+
+if __name__ == "__main__":
+    unittest.main()
