@@ -11,7 +11,7 @@ class TestReview(unittest.TestCase):
     """ Review test cases """
 
     def setUp(self):
-        """ Fetching the class for testing """
+        """ Test suite arrangements """
         self.review = Review()
 
     def test_review_inheritance(self):
@@ -65,3 +65,7 @@ class TestReview(unittest.TestCase):
     def test_non_text_attr_empty(self):
         """ Is the text empty """
         self.assertFalse(bool(getattr(self.review, "text")))
+
+
+if __name__ == "__main__":
+    unittest.main()
