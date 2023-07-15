@@ -11,7 +11,7 @@ class TestPlace(unittest.TestCase):
     """ Place test cases """
 
     def setUp(self):
-        """ Fetching the class for testing """
+        """ Test suite arrangements """
         self.place = Place()
         self.attr_list = [
             "city_id",
@@ -124,3 +124,7 @@ class TestPlace(unittest.TestCase):
         """ Default values"""
         for attribute in self.attr_list:
             self.assertFalse(bool(getattr(self.place, attribute)))
+
+
+if __name__ == "__main__":
+    unittest.main()
