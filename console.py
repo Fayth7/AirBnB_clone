@@ -170,15 +170,20 @@ class HBNBCommand(cmd.Cmd):
                 func, _, clas_id = command.partition("(\"")
                 id = clas_id[:-2]
                 new_command = f"{class_name} {id}"
-                print(class_name)
                 if func == "show":
                     self.do_show(new_command)
                 elif func == "destroy":
                     self.do_destroy(new_command)
-            # elif command.startswith("update"):
-
-            #     stripped_command = f"{class_name} {}"
-            #     self.do_update_id()
+            elif command.startswith("update"):
+                # User.update("4726cdcc-50e2-48b0-aebc-9fd403a36d8e", "first_name", "John")
+                # update User 4726cdcc-50e2-48b0-aebc-9fd403a36d8e first_name "Emma"
+                func, _, others = command.partition("(")
+                args = others.split(", ")
+                id = args[0].strip("\"")
+                name = args[1]
+                value = args[2].strip(")")
+                stripped_command = f"{class_name} {id} {name} {value}"
+                self.do_update_id(stripped_command)
             else:
                 print("** no instance found **")
         else:
