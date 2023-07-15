@@ -32,7 +32,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, arg):
-        """Creates a new instance, saves it to the JSON file, and prints the id"""
+        """Creates a new instance, saves it to the JSON file, and prints id"""
         if len(arg) == 0:
             print("** class name missing **")
         elif arg not in self.classes:
@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
             print(new_instance.id)
 
     def do_show(self, arg):
-        """Prints the string representation of an instance based on the class name and id"""
+        """Prints string rep of an instance based on class name & id"""
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")

@@ -22,7 +22,11 @@ class BaseModel:
 
     def __str__(self) -> str:
         """ Returns: [class name] (ID) <class dictionary>"""
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__,
+            self.id,
+            self.__dict__
+        )
 
     def save(self):
         """ updates the public updated_at with the current datetime """
