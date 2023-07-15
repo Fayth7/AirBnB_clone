@@ -11,7 +11,7 @@ class TestCity(unittest.TestCase):
     """ City test cases """
 
     def setUp(cls):
-        """ Fetching the class for testing """
+        """ Test suite arrangements """
         cls.city = City()
 
     def test_city_inheritance(cls):
