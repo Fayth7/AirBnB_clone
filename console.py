@@ -166,8 +166,19 @@ class HBNBCommand(cmd.Cmd):
                 self.do_all(class_name)
             elif command == "count()":
                 self.do_count(class_name)
-            elif command == "show()":
-                self.do_show(class_name)
+            elif command.endswith("\")"):
+                func, _, clas_id = command.partition("(\"")
+                id = clas_id[:-2]
+                new_command = f"{class_name} {id}"
+                print(class_name)
+                if func == "show":
+                    self.do_show(new_command)
+                elif func == "destroy":
+                    self.do_destroy(new_command)
+            # elif command.startswith("update"):
+
+            #     stripped_command = f"{class_name} {}"
+            #     self.do_update_id()
             else:
                 print("** no instance found **")
         else:
