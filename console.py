@@ -123,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
         #     print("** class doesn't exist **")
         # else:
         #     # print([str(obj)
-        #     #       for obj in objects.values() if isinstance(obj, eval(arg))])
+        #     # for obj in objects.values() if isinstance(obj, eval(arg))])
         #     class_name = args[0]
         #     objects = storage.all(class_name)
         #     print([str(obj) for obj in objects])

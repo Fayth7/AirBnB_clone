@@ -9,13 +9,15 @@ class User(BaseModel):
     The User model
 
     Arguments:
-        email (str): Unique City id.
+        email (str): User email.
         password (str): User password.
         first_name (str): User first name.
-        last_name (str): User last nae.
+        last_name (str): User last name.
+        age (int): User age.
 
     """
     email = ""
     password = ""
     first_name = ""
     last_name = ""
+    age = 0
