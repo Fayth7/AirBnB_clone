@@ -11,7 +11,7 @@ class TestUser(unittest.TestCase):
     """ User test cases """
 
     def setUp(self):
-        """ Fetching the class for testing """
+        """ Test suite arrangements """
         self.user = User()
 
     def test_inheritance(self):
@@ -118,3 +118,7 @@ class TestUser(unittest.TestCase):
     def test_non_last_name_attr_type(self):
         """ Is the last_name sttributes of type INTEGER? """
         self.assertFalse(bool(getattr(self.user, "last_name")))
+
+
+if __name__ == "__main__":
+    unittest.main()

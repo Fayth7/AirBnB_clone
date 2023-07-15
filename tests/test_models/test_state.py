@@ -11,7 +11,7 @@ class TestState(unittest.TestCase):
     """ State test cases """
 
     def setUp(self):
-        """ Fetching the class for testing """
+        """ Test suite arrangements """
         self.state = State()
 
     def test_state_inheritance(self):
@@ -41,3 +41,7 @@ class TestState(unittest.TestCase):
     def test_attribute_empty(self):
         """ Is the name empty? """
         self.assertFalse(bool(getattr(self.state, "name")))
+
+
+if __name__ == "__main__":
+    unittest.main()
