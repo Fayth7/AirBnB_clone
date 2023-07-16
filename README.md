@@ -1,8 +1,8 @@
 
 ![AirBnB](./assets/Screenshot%20from%202023-07-10%2014-59-47.png)
 # Table of contents
-TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION | MERGED/AUTHORISED BY
------ | ------ | ----------
+TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION | MERGED / AUTHORED BY
+----- | ------ | ---------- | -------
 [0x00] | [README](./README.md) | Project Documentation | B
 [0x00] | [Authors](./AUTHORS) | Project Authors | B
 [0x01] | [Be pycodestyle compliant!](./) | Beautifully written code that passes the pycodestyle checks | B
