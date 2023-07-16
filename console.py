@@ -128,36 +128,6 @@ class HBNBCommand(cmd.Cmd):
         #     objects = storage.all(class_name)
         #     print([str(obj) for obj in objects])
 
-    def do_update(self, arg):
-        """Updates an instance based on the class name and id"""
-        from models import storage
-        args = arg.split()
-        if len(args) == 0:
-            print("** class name missing **")
-        elif args[0] not in self.classes:
-            print("** class doesn't exist **")
-        elif len(args) == 1:
-            print("** instance id missing **")
-        else:
-            key = "{}.{}".format(args[0], args[1])
-            objects = storage.all()
-            if key not in objects:
-                print("** no instance found **")
-            elif len(args) == 2:
-                print("** attribute name missing **")
-            elif len(args) == 3:
-                print("** value missing **")
-            else:
-                instance = objects[key]
-                attribute = args[2]
-                value = args[3].strip("\"'")
-                if hasattr(instance, attribute):
-                    attr_type = type(getattr(instance, attribute))
-                    setattr(instance, attribute, attr_type(value))
-                    instance.save()
-                else:
-                    print("** attribute doesn't exist **")
-
     def default(self, line):
         """Handle the <class name>.all() command"""
         class_name, _, command = line.partition(".")
@@ -183,9 +153,9 @@ class HBNBCommand(cmd.Cmd):
                 name = args[1]
                 value = args[2].strip(")")
                 stripped_command = f"{class_name} {id} {name} {value}"
-                self.do_update_id(stripped_command)
+                self.do_update(stripped_command)
             else:
-                print("** no instance found **")
+                print("** no instance found faith **")
         else:
             print("*** Unknown syntax: {}".format(line))
 
@@ -254,7 +224,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    def do_update_id(self, arg):
+    def do_update(self, arg):
         """Update an instance based on its ID"""
         from models import storage
         args = arg.split()
