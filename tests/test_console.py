@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Test suite for HBNBCommand class testing attributes, methods, and functionality"""
+"""Test suite for HBNBCommand class testing attributes, methods"""
 
 import unittest
 from unittest.mock import patch
