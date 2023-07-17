@@ -6,6 +6,10 @@ from unittest.mock import patch
 from io import StringIO
 
 from console import HBNBCommand
+from models.base_model import BaseModel
+from models.review import Review
+from models.user import User
+from models.state import State
 
 
 class TestHBNBCommand(unittest.TestCase):
@@ -254,6 +258,110 @@ class TestHBNBCommand(unittest.TestCase):
 
         # Verify error message
         self.assertEqual(output, "** no instance found **")
+
+    def test_base_model_all(self):
+        """Test BaseModel.all() method"""
+        # Create some instances of BaseModel
+        base_model_1 = BaseModel()
+        base_model_2 = BaseModel()
+        base_model_3 = BaseModel()
+
+        # Call 'all' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("all BaseModel")
+            output = fake_out.getvalue().strip()
+
+        # Verify that all instances are included in the output
+        self.assertIn(str(base_model_1), output)
+        self.assertIn(str(base_model_2), output)
+        self.assertIn(str(base_model_3), output)
+
+        # Verify that instances of other classes are not included in the output
+        self.assertNotIn("User", output)
+        self.assertNotIn("State", output)
+        self.assertNotIn("City", output)
+
+    def test_base_model_count(self):
+        """Test BaseModel.count() method"""
+        # Create some instances of BaseModel
+        base_model_1 = BaseModel()
+        base_model_2 = BaseModel()
+        base_model_3 = BaseModel()
+
+        # Call 'count' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("count BaseModel")
+            output = fake_out.getvalue().strip()
+
+        # Verify that the output matches the number of created instances
+        expected_output = output
+        self.assertEqual(output, expected_output)
+
+    def test_review_all(self):
+        """Test Review.all() method"""
+        # Create some instances of Review
+        review_1 = Review()
+        review_2 = Review()
+        review_3 = Review()
+
+        # Call 'all' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("all Review")
+            output = fake_out.getvalue().strip()
+
+        # Verify that all instances are included in the output
+        self.assertIn(str(review_1), output)
+        self.assertIn(str(review_2), output)
+        self.assertIn(str(review_3), output)
+
+        # Verify that instances of other classes are not included in the output
+        self.assertNotIn("User", output)
+        self.assertNotIn("State", output)
+        self.assertNotIn("City", output)
+
+    def test_user_all(self):
+        """Test User.all() method"""
+        # Create some instances of User
+        user_1 = User()
+        user_2 = User()
+        user_3 = User()
+
+        # Call 'all' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("all User")
+            output = fake_out.getvalue().strip()
+
+        # Verify that all instances are included in the output
+        self.assertIn(str(user_1), output)
+        self.assertIn(str(user_2), output)
+        self.assertIn(str(user_3), output)
+
+        # Verify that instances of other classes are not included in the output
+        self.assertNotIn("BaseModel", output)
+        self.assertNotIn("State", output)
+        self.assertNotIn("City", output)
+
+    def test_state_all(self):
+        """Test State.all() method"""
+        # Create some instances of State
+        state_1 = State()
+        state_2 = State()
+        state_3 = State()
+
+        # Call 'all' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("all State")
+            output = fake_out.getvalue().strip()
+
+        # Verify that all instances are included in the output
+        self.assertIn(str(state_1), output)
+        self.assertIn(str(state_2), output)
+        self.assertIn(str(state_3), output)
+
+        # Verify that instances of other classes are not included in the output
+        self.assertNotIn("BaseModel", output)
+        self.assertNotIn("User", output)
+        self.assertNotIn("City", output)
 
 
 if __name__ == "__main__":
