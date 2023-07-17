@@ -425,35 +425,6 @@ class TestHBNBCommand(unittest.TestCase):
         # Verify that all instances are included in the output
         self.assertIn(str(amenity_1), output)
 
-    def test_amenity_all(self):
-        """Test Amenity.all() method"""
-        # Create some instances of Amenity
-        amenity_1 = Amenity()
-        amenity_2 = Amenity()
-        amenity_3 = Amenity()
-
-        # Call 'all' command in the console
-        with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.cmd_testing.onecmd("all Amenity")
-            output = fake_out.getvalue().strip()
-
-        # Verify that all instances are included in the output
-        self.assertIn(str(amenity_1), output)
-        self.assertIn(str(amenity_2), output)
-        self.assertIn(str(amenity_3), output)
-
-        # Verify that instances of other classes are not included in the output
-        self.assertNotIn("BaseModel", output)
-        self.assertNotIn("User", output)
-        self.assertNotIn("City", output)
-        self.assertIn(str(amenity_2), output)
-        self.assertIn(str(amenity_3), output)
-
-        # Verify that instances of other classes are not included in the output
-        self.assertNotIn("BaseModel", output)
-        self.assertNotIn("User", output)
-        self.assertNotIn("City", output)
-
     def test_user_count(self):
         """Test User.count() method"""
         # Create some instances of User
@@ -479,7 +450,7 @@ class TestHBNBCommand(unittest.TestCase):
 
         # Call 'count' command in the console
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.cmd_testing.onecmd("state.count()")
+            self.cmd_testing.onecmd("State.count()")
             output = fake_out.getvalue().strip()
 
         # Verify that the output matches the number of created instances
