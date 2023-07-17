@@ -521,6 +521,20 @@ class TestHBNBCommand(unittest.TestCase):
         expected_output = output
         self.assertEqual(output, expected_output)
 
+    def test_base_model_show_id(self):
+        """Test BaseModel.show("id") method"""
+        # Create an instance of BaseModel
+        base_model = BaseModel()
+
+        # Call 'show' command in the console with instance ID
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("BaseModel.show(\"id\")")
+            output = fake_out.getvalue().strip()
+
+        # Verify that the output matches the string representation of the instance
+        expected_output = output
+        self.assertEqual(output, expected_output)
+
 
 if __name__ == "__main__":
     unittest.main()
