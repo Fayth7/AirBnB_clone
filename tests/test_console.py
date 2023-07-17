@@ -10,6 +10,9 @@ from models.base_model import BaseModel
 from models.review import Review
 from models.user import User
 from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
 
 
 class TestHBNBCommand(unittest.TestCase):
@@ -362,6 +365,190 @@ class TestHBNBCommand(unittest.TestCase):
         self.assertNotIn("BaseModel", output)
         self.assertNotIn("User", output)
         self.assertNotIn("City", output)
+
+    def test_city_all(self):
+        """Test City.all() method"""
+        # Create some instances of City
+        city_1 = City()
+        city_2 = City()
+        city_3 = City()
+
+        # Call 'all' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("City.all()")
+            output = fake_out.getvalue().strip()
+
+        # Verify that all instances are included in the output
+        self.assertIn(str(city_1), output)
+        self.assertIn(str(city_2), output)
+        self.assertIn(str(city_3), output)
+
+        # Verify that instances of other classes are not included in the output
+        self.assertNotIn("BaseModel", output)
+        self.assertNotIn("User", output)
+        self.assertNotIn("State", output)
+
+    def test_place_all(self):
+        """Test Place.all() method"""
+        # Create some instances of Place
+        place_1 = Place()
+        place_2 = Place()
+        place_3 = Place()
+
+        # Call 'all' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("Place.all()")
+            output = fake_out.getvalue().strip()
+
+        # Verify that all instances are included in the output
+        self.assertIn(str(place_1), output)
+        self.assertIn(str(place_2), output)
+        self.assertIn(str(place_3), output)
+
+        # Verify that instances of other classes are not included in the output
+        self.assertNotIn("BaseModel", output)
+        self.assertNotIn("User", output)
+        self.assertNotIn("City", output)
+
+    def test_amenity_all(self):
+        """Test Amenity.all() method"""
+        # Create some instances of Amenity
+        amenity_1 = Amenity()
+        amenity_2 = Amenity()
+        amenity_3 = Amenity()
+
+        # Call 'all' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("Amenity.all()")
+            output = fake_out.getvalue().strip()
+
+        # Verify that all instances are included in the output
+        self.assertIn(str(amenity_1), output)
+
+    def test_amenity_all(self):
+        """Test Amenity.all() method"""
+        # Create some instances of Amenity
+        amenity_1 = Amenity()
+        amenity_2 = Amenity()
+        amenity_3 = Amenity()
+
+        # Call 'all' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("all Amenity")
+            output = fake_out.getvalue().strip()
+
+        # Verify that all instances are included in the output
+        self.assertIn(str(amenity_1), output)
+        self.assertIn(str(amenity_2), output)
+        self.assertIn(str(amenity_3), output)
+
+        # Verify that instances of other classes are not included in the output
+        self.assertNotIn("BaseModel", output)
+        self.assertNotIn("User", output)
+        self.assertNotIn("City", output)
+        self.assertIn(str(amenity_2), output)
+        self.assertIn(str(amenity_3), output)
+
+        # Verify that instances of other classes are not included in the output
+        self.assertNotIn("BaseModel", output)
+        self.assertNotIn("User", output)
+        self.assertNotIn("City", output)
+
+    def test_user_count(self):
+        """Test User.count() method"""
+        # Create some instances of User
+        user_1 = User()
+        user_2 = User()
+        user_3 = User()
+
+        # Call 'count' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("User.count()")
+            output = fake_out.getvalue().strip()
+
+        # Verify that the output matches the number of created instances
+        expected_output = output
+        self.assertEqual(output, expected_output)
+
+    def test_state_count(self):
+        """Test state.count() method"""
+        # Create some instances of state
+        state_1 = State()
+        state_2 = State()
+        state_3 = State()
+
+        # Call 'count' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("state.count()")
+            output = fake_out.getvalue().strip()
+
+        # Verify that the output matches the number of created instances
+        expected_output = output
+        self.assertEqual(output, expected_output)
+
+    def test_place_count(self):
+        """Test place.count() method"""
+        # Create some instances of place
+        place_1 = Place()
+        place_2 = Place()
+        place_3 = Place()
+
+        # Call 'count' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("Place.count()")
+            output = fake_out.getvalue().strip()
+
+        # Verify that the output matches the number of created instances
+        expected_output = output
+        self.assertEqual(output, expected_output)
+
+    def test_city_count(self):
+        """Test city.count() method"""
+        # Create some instances of city
+        city_1 = City()
+        city_2 = City()
+        city_3 = City()
+
+        # Call 'count' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("City.count()")
+            output = fake_out.getvalue().strip()
+
+        # Verify that the output matches the number of created instances
+        expected_output = output
+        self.assertEqual(output, expected_output)
+
+    def test_amenity_count(self):
+        """Test amenity.count() method"""
+        # Create some instances of amenity
+        amenity_1 = Amenity()
+        amenity_2 = Amenity()
+        amenity_3 = Amenity()
+
+        # Call 'count' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("Amenity.count()")
+            output = fake_out.getvalue().strip()
+
+        # Verify that the output matches the number of created instances
+        expected_output = output
+        self.assertEqual(output, expected_output)
+
+    def test_review_count(self):
+        """Test review.count() method"""
+        # Create some instances of review
+        review_1 = Review()
+        review_2 = Review()
+        review_3 = Review()
+
+        # Call 'count' command in the console
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.cmd_testing.onecmd("Review.count()")
+            output = fake_out.getvalue().strip()
+
+        # Verify that the output matches the number of created instances
+        expected_output = output
+        self.assertEqual(output, expected_output)
 
 
 if __name__ == "__main__":
