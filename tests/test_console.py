@@ -268,7 +268,7 @@ class TestHBNBCommand(unittest.TestCase):
 
         # Call 'all' command in the console
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.cmd_testing.onecmd("all BaseModel")
+            self.cmd_testing.onecmd("BaseModel.all()")
             output = fake_out.getvalue().strip()
 
         # Verify that all instances are included in the output
@@ -290,7 +290,7 @@ class TestHBNBCommand(unittest.TestCase):
 
         # Call 'count' command in the console
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.cmd_testing.onecmd("count BaseModel")
+            self.cmd_testing.onecmd("BaseModel.count()")
             output = fake_out.getvalue().strip()
 
         # Verify that the output matches the number of created instances
@@ -306,7 +306,7 @@ class TestHBNBCommand(unittest.TestCase):
 
         # Call 'all' command in the console
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.cmd_testing.onecmd("all Review")
+            self.cmd_testing.onecmd("Review.all()")
             output = fake_out.getvalue().strip()
 
         # Verify that all instances are included in the output
@@ -328,7 +328,7 @@ class TestHBNBCommand(unittest.TestCase):
 
         # Call 'all' command in the console
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.cmd_testing.onecmd("all User")
+            self.cmd_testing.onecmd("User.all()")
             output = fake_out.getvalue().strip()
 
         # Verify that all instances are included in the output
@@ -350,7 +350,7 @@ class TestHBNBCommand(unittest.TestCase):
 
         # Call 'all' command in the console
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.cmd_testing.onecmd("all State")
+            self.cmd_testing.onecmd("State.all()")
             output = fake_out.getvalue().strip()
 
         # Verify that all instances are included in the output
