@@ -23,7 +23,7 @@ class HBNBCommand(cmd.Cmd):
     }
 
     def parseline(self, line):
-        """Override the default parseline() method to handle <class name>.all() command"""
+        """Override the default parseline() <class name>.all() command"""
         line = line.strip()
         if line.startswith("."):
             line = line[1:]
@@ -46,7 +46,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, arg):
-        """Creates a new instance, saves it to the JSON file, and prints the id"""
+        """Creates a new instance, to the JSON file, and prints the id"""
         if len(arg) == 0:
             print("** class name missing **")
         elif arg not in self.classes:
@@ -57,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
             print(new_instance.id)
 
     def do_show(self, arg):
-        """Prints the string representation of an instance based on the class name and id"""
+        """Prints the string representation based on the class name and id"""
         from models import storage
         args = arg.split()
         if len(args) == 0:
@@ -126,8 +126,6 @@ class HBNBCommand(cmd.Cmd):
                 elif func == "destroy":
                     self.do_destroy(new_command)
             elif command.startswith("update"):
-                # User.update("4726cdcc-50e2-48b0-aebc-9fd403a36d8e", "first_name", "John")
-                # update User 4726cdcc-50e2-48b0-aebc-9fd403a36d8e first_name "Emma"
                 func, _, others = command.partition("(")
                 args = others.split(", ")
                 id = args[0].strip("\"")
@@ -196,7 +194,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    def do_update(self, arg):
+def do_update(self, arg):
         """Update an instance based on its ID"""
         from models import storage
         args = arg.split()

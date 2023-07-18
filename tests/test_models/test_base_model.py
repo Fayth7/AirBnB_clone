@@ -24,7 +24,8 @@ class TestBaseModel(unittest.TestCase):
     def test_well_str_representation(self):
         """String representation appropriate? """
         self.assertEqual(str(
-            self.object_one), f"[BaseModel] ({self.object_one.id}) {self.object_one.__dict__}")
+            self.object_one),
+            f"[BaseModel] ({self.object_one.id}) {self.object_one.__dict__}")
 
     def test_ids_unique(self):
         """ Unique IDs?  """
