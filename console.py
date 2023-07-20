@@ -155,8 +155,8 @@ class HBNBCommand(cmd.Cmd):
                         if type(obj).__name__ == class_name)
             print(count)
 
-    def do_show(self, arg):
-        """Prints the string representation of an instance based on the class name and id"""
+    def do_show_id(self, arg):
+        """Show an instance based on its ID"""
         from models import storage
         args = arg.split()
         if len(args) == 0:
@@ -164,14 +164,14 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in self.classes:
             print("** class doesn't exist **")
         elif len(args) == 1:
-            print("** instance id missing **")
+            print("** instance ID missing **")
         else:
-            class_name, instance_id = args[0], args[1]
+            class_name = args[0]
+            instance_id = args[1].strip("\"'")
             objects = storage.all()
-            key = f"{class_name}.{instance_id}"
+            key = "{}.{}".format(class_name, instance_id)
             if key in objects:
-                instance = objects[key]
-                print(instance)
+                print(objects[key])
             else:
                 print("** no instance found **")
 
@@ -196,37 +196,41 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-
-def do_update(self, arg):
-    """Update an instance based on its ID"""
-    from models import storage
-    args = arg.split(",")
-    if len(args) == 0:
-        print("** class name missing **")
-    elif args[0] not in self.classes:
-        print("** class doesn't exist **")
-    elif len(args) == 1:
-        print("** instance ID missing **")
-    elif len(args) == 2:
-        print("** attribute name missing **")
-    elif len(args) == 3:
-        print("** value missing **")
-    else:
-        class_name = args[0].strip()
-        instance_id = args[1].strip().strip("\"'")
-        attribute_name = args[2].strip()
-        attribute_value = args[3].strip().strip("\"'")
-        objects = storage.all()
-        key = "{}.{}".format(class_name, instance_id)
-        if key in objects:
-            instance = objects[key]
-            if hasattr(instance, attribute_name):
-                setattr(instance, attribute_name, attribute_value)
-                instance.save()
-            else:
-                print("** attribute doesn't exist **")
+    def do_update(self, arg):
+        """Update an instance based on its ID"""
+        from models import storage
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance ID missing **")
+        elif len(args) == 2:
+            print("** attribute name missing **")
+        elif len(args) == 3:
+            print("** value missing **")
         else:
-            print("** no instance found **")
+            class_name = args[0]
+            instance_id = args[1].strip("\"'")
+            attribute_name = args[2]
+            attribute_value = args[3].strip("\"'")
+            objects = storage.all()
+            key = "{}.{}".format(class_name, instance_id)
+            if key in objects:
+                instance = objects[key]
+                if hasattr(instance, attribute_name):
+                    if attribute_name in ['age', 'password', 'email']:
+                        setattr(instance, attribute_name, attribute_value)
+                    else:
+                        attr_type = type(getattr(instance, attribute_name))
+                        setattr(instance, attribute_name,
+                                attr_type(attribute_value))
+                    instance.save()
+                else:
+                    print("** attribute doesn't exist **")
+            else:
+                print("** no instance found **")
 
     def do_update_dict(self, arg):
         """Update an instance based on its ID with a dictionary representation"""
