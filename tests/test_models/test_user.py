@@ -34,6 +34,10 @@ class TestUser(unittest.TestCase):
         """ Does the class have all the attributes """
         self.assertTrue(hasattr(self.user, "last_name"))
 
+    def test_last_name_attributes_present(self):
+        """ Does the class have all the attributes """
+        self.assertTrue(hasattr(self.user, "age"))
+
     # Email
     def test_email_attr_type_string(self):
         """ Is the email sttributes of type STRING? """
@@ -115,9 +119,30 @@ class TestUser(unittest.TestCase):
         """ Is the last_name sttributes of type INTEGER? """
         self.assertIsNot(type(self.user.last_name), bool)
 
-    def test_non_last_name_attr_type(self):
+    def test_non_last_name_attr_empty(self):
         """ Is the last_name sttributes of type INTEGER? """
         self.assertFalse(bool(getattr(self.user, "last_name")))
+
+    # age
+    def test_age_attr_type_int(self):
+        """ Is the age sttributes of type STRING? """
+        self.assertIs(type(self.user.age), int)
+
+    def test_age_attr_type_not_string(self):
+        """ Is the age sttributes of type INTEGER? """
+        self.assertIsNot(type(self.user.age), str)
+
+    def test_age_attr_type_not_bool(self):
+        """ Is the age sttributes of type BOOLEAN? """
+        self.assertIsNot(type(self.user.age), bool)
+
+    def test_age_attr_type_not_float(self):
+        """ Is the age sttributes of type FLOAT? """
+        self.assertIsNot(type(self.user.age), float)
+
+    def test_non_age_attr_empty(self):
+        """ Is the age empty? """
+        self.assertFalse(bool(getattr(self.user, "age")))
 
 
 if __name__ == "__main__":

@@ -13,6 +13,6 @@ class Review(BaseModel):
         user_id (str): Unique user id.
         text (str): Review.
     """
-    city_id = ""
+    place_id = ""
     user_id = ""
     text = ""
