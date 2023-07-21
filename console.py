@@ -159,7 +159,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** attribute doesn't exist **")
 
     def default(self, line):
-        """Handle the <class name>.all() command"""
+        """Handle the <class name>.all() and <class name>.update(<id>, <attribute name>, <attribute value>) commands"""
         class_name, _, command = line.partition(".")
         if class_name in self.classes:
             if command == "all()":
@@ -175,13 +175,11 @@ class HBNBCommand(cmd.Cmd):
                 elif func == "destroy":
                     self.do_destroy(new_command)
             elif command.startswith("update"):
-                # User.update("4726cdcc-50e2-48b0-aebc-9fd403a36d8e", "first_name", "John")
-                # update User 4726cdcc-50e2-48b0-aebc-9fd403a36d8e first_name "Emma"
-                func, _, others = command.partition("(")
-                args = others.split(", ")
-                id = args[0].strip("\"")
-                name = args[1]
-                value = args[2].strip(")")
+                func, _, update_args = command.partition("(")
+                update_args = update_args.rstrip(")").split(", ")
+                id = update_args[0].strip("\"")
+                name = update_args[1]
+                value = update_args[2].strip("\"")
                 stripped_command = f"{class_name} {id} {name} {value}"
                 self.do_update_id(stripped_command)
             else:
