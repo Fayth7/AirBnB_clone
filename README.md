@@ -1,6 +1,7 @@
 ![AirBnB](./assets/logo.png)
-![AirBnB](./assets/Screenshot%20from%202023-07-10%2014-59-47.png)
 # Table of contents
+![AirBnB](./assets/Screenshot%20from%202023-07-10%2014-59-47.png)
+
 TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION
 ----- | ------ | ---------- 
 [0x00] | [README](./README.md) | Project Documentation
